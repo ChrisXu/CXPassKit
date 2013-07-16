@@ -82,7 +82,15 @@
 
 + (BOOL)hasPassFileAtDocumentWithPassTypeIdentifier:(NSString *)passTypeIdentifier
 {
-    return ([CXPassKit passInDocumentWithPassTypeIdentifier:passTypeIdentifier] != nil);
+    NSString *path = [passTypeIdentifier stringByAppendingString:@".pkpass"];
+    
+    NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSData *data = [NSData dataWithContentsOfFile:[documentPath stringByAppendingPathComponent:path]];
+    
+    NSError *error = nil;
+    
+    return (data != nil);
 }
 
 + (BOOL)hasPassInPassbookWithPassTypeIdentifier:(NSString *)passTypeIdentifier;
