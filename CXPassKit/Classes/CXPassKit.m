@@ -87,9 +87,7 @@
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
     NSData *data = [NSData dataWithContentsOfFile:[documentPath stringByAppendingPathComponent:path]];
-    
-    NSError *error = nil;
-    
+        
     return (data != nil);
 }
 
@@ -98,7 +96,7 @@
     return ([CXPassKit passInPassBookWithPassTypeIdentifier:passTypeIdentifier] != nil);
 }
 
-+ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url compelectionBlock:(downloadCompelectionBlock)block;
++ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url completionBlock:(downloadCompletionBlock)block;
 {
     if (passTypeIdentifier == nil || url == nil)
     {
@@ -130,7 +128,7 @@
     [operation start];
 }
 
-+ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC;
++ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC completionBlock:(presentCompletionBlock)block
 {
     if ([PKPassLibrary isPassLibraryAvailable] && delegateVC && passTypeIdentifier)
     {
@@ -139,17 +137,29 @@
         NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         
         NSData *data = [NSData dataWithContentsOfFile:[documentPath stringByAppendingPathComponent:path]];
-        NSError *error;
         
         if (data)
         {
+            NSError *error = nil;
             PKPass *pass = [[PKPass alloc] initWithData:data error:&error];
             
-            if (pass)
+            if (pass && error == nil)
             {
                 PKAddPassesViewController *vc = [[PKAddPassesViewController alloc] initWithPass:pass];
                 [vc setDelegate:(id)delegateVC];
-                [delegateVC presentViewController:vc animated:YES completion:nil];
+                [delegateVC presentViewController:vc animated:YES completion:^{
+                    if (block)
+                    {
+                        block(YES,nil,nil);
+                    }
+                }];
+            }
+            else
+            {
+                if (block)
+                {
+                    block(NO,@"Fail to open pkpass file",error);
+                }
             }
         }
     }

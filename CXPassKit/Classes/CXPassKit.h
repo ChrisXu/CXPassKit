@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <PassKit/PassKit.h>
 
-typedef void (^downloadCompelectionBlock)(BOOL success,NSString *msg);
+typedef void (^downloadCompletionBlock)(BOOL success,NSString *msg);
+typedef void (^presentCompletionBlock)(BOOL success,NSString *msg, NSError *error);
 
 @interface CXPassKit : NSObject
 
@@ -22,9 +23,9 @@ typedef void (^downloadCompelectionBlock)(BOOL success,NSString *msg);
 + (BOOL)hasPassFileAtDocumentWithPassTypeIdentifier:(NSString *)passTypeIdentifier;
 + (BOOL)hasPassInPassbookWithPassTypeIdentifier:(NSString *)passTypeIdentifier;
 
-+ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url compelectionBlock:(downloadCompelectionBlock)block;
++ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url completionBlock:(downloadCompletionBlock)block;
 
-+ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC;
++ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC completionBlock:(presentCompletionBlock)block;
 
 + (void)removePassWithPassTypeIdentifier:(NSString *)passTypeIdentifier;
 

@@ -45,7 +45,7 @@
 
 - (IBAction)downloadAction:(id)sender
 {
-    [CXPassKit downloadWithPassTypeIdentifier:@"pass.appshot.net.ios6" fromURL:[NSURL URLWithString:passURLTextField.text] compelectionBlock:^(BOOL success, NSString *msg) {
+    [CXPassKit downloadWithPassTypeIdentifier:@"pass.appshot.net.ios6" fromURL:[NSURL URLWithString:passURLTextField.text] completionBlock:^(BOOL success, NSString *msg) {
         NSLog(@"%@",msg);
     }];
 }
@@ -57,7 +57,9 @@
 
 - (IBAction)openAction:(id)sender
 {
-    [CXPassKit presentPassWithPassTypeIdentifier:@"pass.appshot.net.ios6" delegateViewController:self];
+    [CXPassKit presentPassWithPassTypeIdentifier:@"pass.appshot.net.ios6" delegateViewController:self completionBlock:^(BOOL success, NSString *msg, NSError *error) {
+        
+    }];
 }
 
 #pragma mark - PKAddPassesViewControllerDelegate
