@@ -30,14 +30,14 @@ check if `pass` is exist.
 
 
 ```Objective-C
-+ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url compelectionBlock:(downloadCompelectionBlock)block;
++ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url completionBlock:(downloadCompletionBlock)block;
 ```
 
 To downloand `pass` to document folder in application.
 *the file will be named as `passTypeIdentifier`.pkpass.
 
 ```Objective-C
-+ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC compelectionBlock:(presentCompelectionBlock)block;
++ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC completionBlock:(presentCompletionBlock)block;
 ```
 
 Using this method to present `pass`.
