@@ -23,9 +23,9 @@ typedef void (^presentCompletionBlock)(BOOL success,NSString *msg, NSError *erro
 + (BOOL)hasPassFileAtDocumentWithPassTypeIdentifier:(NSString *)passTypeIdentifier;
 + (BOOL)hasPassInPassbookWithPassTypeIdentifier:(NSString *)passTypeIdentifier;
 
-+ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url completionBlock:(downloadCompletionBlock)block;
++ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url completion:(downloadCompletionBlock)block;
 
-+ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC completionBlock:(presentCompletionBlock)block;
++ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC completion:(presentCompletionBlock)block;
 
 + (void)removePassWithPassTypeIdentifier:(NSString *)passTypeIdentifier;
 

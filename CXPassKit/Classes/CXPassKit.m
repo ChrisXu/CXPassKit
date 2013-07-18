@@ -96,7 +96,7 @@
     return ([CXPassKit passInPassBookWithPassTypeIdentifier:passTypeIdentifier] != nil);
 }
 
-+ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url completionBlock:(downloadCompletionBlock)block;
++ (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url completion:(downloadCompletionBlock)block;
 {
     if (passTypeIdentifier == nil || url == nil)
     {
@@ -128,7 +128,7 @@
     [operation start];
 }
 
-+ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC completionBlock:(presentCompletionBlock)block
++ (void)presentPassWithPassTypeIdentifier:(NSString *)passTypeIdentifier delegateViewController:(UIViewController *)delegateVC completion:(presentCompletionBlock)block
 {
     if ([PKPassLibrary isPassLibraryAvailable] && delegateVC && passTypeIdentifier)
     {
