@@ -3,7 +3,12 @@
 A passkit to help you handle saving `.pkpass` file to document folder in application, and `pass` state in passbook.
 
 ---
-**How to use**
+##Installation (v1.0.0)
+
+* CocoaPods add `pod 'CXPassKit'`
+
+---
+###How to use
 
 `passTypeIdentifier` is the specific identifier of your pass. It should be the same value in your `pass.json`.
 
@@ -48,11 +53,11 @@ Using this method to present `pass`.
 
 Using this method to remove specific `pass`.
 
-**Coming soon**:
+###Next
 
 * Replace method
 
-**Supports**:
+###Supports
 * iOS 5.0 or later.
 * Useing ARC
 * Required frameworks: PassKit. (suggestion to mark this as optional at  `Build Phases` -> `Link Binary With Libraries`)

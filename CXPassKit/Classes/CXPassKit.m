@@ -93,7 +93,12 @@
 
 + (BOOL)hasPassInPassbookWithPassTypeIdentifier:(NSString *)passTypeIdentifier;
 {
-    return ([CXPassKit passInPassBookWithPassTypeIdentifier:passTypeIdentifier] != nil);
+    if ([PKPassLibrary isPassLibraryAvailable])
+    {
+        return ([CXPassKit passInPassBookWithPassTypeIdentifier:passTypeIdentifier] != nil);
+    }
+    
+    return NO;
 }
 
 + (void)downloadWithPassTypeIdentifier:(NSString *)passTypeIdentifier fromURL:(NSURL *)url completion:(downloadCompletionBlock)block;
